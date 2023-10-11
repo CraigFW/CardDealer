@@ -1,4 +1,4 @@
-# CardShuffler
+# CardDealer
 
 A basic deck dealer website with options to choose how many players and how many cards to deal.
 
