@@ -1,5 +1,10 @@
 # CardDealer
 
+Github pages link: https://craigfw.github.io/CardDealer/
+
+<img width="1059" alt="Screenshot 2023-10-11 190533" src="https://github.com/CraigFW/CardDealer/assets/4436733/7dd19e10-dcb9-4536-854d-296f2232de45">
+<img width="948" alt="Screenshot 2023-10-11 190605" src="https://github.com/CraigFW/CardDealer/assets/4436733/827bde50-b0dd-4218-916f-f527ce22ed73">
+
 A basic card dealer website with options to choose how many players and how many cards to deal.
 
 Win options currently are: Highest, Lowest and Closest to 21, without going over.
