@@ -1,6 +1,6 @@
 # CardDealer
 
-A basic deck dealer website with options to choose how many players and how many cards to deal.
+A basic card dealer website with options to choose how many players and how many cards to deal.
 
 Win options currently are: Highest, Lowest and Closest to 21, without going over.
 
