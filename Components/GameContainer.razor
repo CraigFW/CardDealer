@@ -1,0 +1,94 @@
+﻿<div class="container">
+    <div>
+        <h4>Card Shuffle Game</h4>
+    </div>
+    <div>
+        <CardMenu OnShuffleClicked="SetGameOptions" />
+    </div>
+    @if (deckList.Count() > 0)
+    {
+        <div>
+            <DeckArea Decks="deckList" />
+        </div>
+    }
+    @if(handList.Count() > 0)
+    {
+        @foreach(var hand in handList)
+        {
+            <div>
+                <HandArea Hand="hand" />
+            </div>
+        }
+    }
+    @if (winningHand != null)
+    {
+        <div class="mt-3">
+            The winning hand is: @winningHand.HandNumber
+        </div>
+    }
+</div>
+
+@code {
+    public List<Deck> deckList = new();
+    public List<Hand> handList = new();
+    public GameOptions game = new(1,1,1, Enums.GameMode.HighestWins);
+
+    private Hand winningHand;
+
+    public string winner = "";
+
+    public void CalculateWinner()
+    {
+        if(game.Mode == Enums.GameMode.HighestWins)
+        {
+            winningHand = handList.MaxBy(x => x.HandTotal);
+        }
+        if(game.Mode == Enums.GameMode.LowestWins)
+        {
+            winningHand = handList.MinBy(x => x.HandTotal);
+        }
+        if(game.Mode == Enums.GameMode.ClosestTo21)
+        {
+            winningHand = handList.Where(x => x.HandTotal <= 21).MaxBy(x => x.HandTotal);
+        }
+    }
+
+    public void SetGameOptions(GameOptions gameOptions)
+    {
+        game.NumberOfDecks = gameOptions.NumberOfDecks;
+        game.NumberOfPlayers = gameOptions.NumberOfPlayers;
+        game.NumberOfCardsPerHand = gameOptions.NumberOfCardsPerHand;
+        game.Mode = gameOptions.Mode;
+
+        Shuffle();
+
+        CalculateWinner();
+    }
+
+    public void Shuffle()
+    {
+        deckList = new();
+        handList = new();
+
+        Deck deck = new();
+        deck = deck.SetOrderedDeck();
+        deckList.Add(deck);
+
+        for(int i = 0; i < game.NumberOfCardsPerHand; i++)
+        {
+            for(int x = 0; x < game.NumberOfPlayers; x++)
+            {
+                if(handList.Count() < game.NumberOfPlayers)
+                    handList.Add(new Hand());
+
+                CardClass drawnCard = deckList[0].DrawCard();
+
+                handList[x].HandNumber = x + 1;
+                handList[x].Cards.Add(drawnCard);
+                handList[x].HandTotal = handList[x].HandTotal += drawnCard.Value;
+
+                deckList[0].Cards.Remove(drawnCard);
+            }
+        }
+    }
+}

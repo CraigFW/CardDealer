@@ -1,0 +1,11 @@
+﻿<div class="flex text-center">
+    @foreach(var deck in Decks)
+    {
+        <img src="carddeck.png" height="200px" />
+    }
+</div>
+
+@code {
+    [Parameter]
+    public List<Deck> Decks { get; set; }
+}

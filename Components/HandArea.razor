@@ -1,0 +1,18 @@
+﻿<div style="border:1px dashed rgba(0, 0, 0, 0.5)">
+    Hand @Hand.HandNumber
+    <div class="d-flex flex-wrap justify-content-center">
+        @foreach (var card in Hand.Cards)
+        {
+            <Card CardParam="card" />
+        }
+    </div>
+
+    <div>
+        Hand Total: <span>@Hand.HandTotal</span>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Hand Hand { get; set; }
+}
