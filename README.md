@@ -38,3 +38,4 @@ Future development:
 - Enabling multiple decks
 - Testing with BUnit
 - Add additional details to cards to display icons for faced cards and number of suit icons for card number
+- Add logic for hand value ties
